@@ -1,9 +1,9 @@
-### Django란?
+# Django란?
 - 3세대 프레임워크
 - MVC 패턴
   - model
   - view 
-  - controller, templete
+  - controller
 
 ### [django 더 자세히 알아보기](./django.md)
 - 프로젝트 생성
@@ -18,7 +18,7 @@
     - admin.py
     - view.py
     - test.py
-- 프로젝트 설정(app.py)
+- 프로젝트 설정(setting.py)
   - DEBUG : 디버그 모드 설정
   
 - manage.py

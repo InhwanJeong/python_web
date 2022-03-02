@@ -7,9 +7,16 @@ django-admin startproject config .
 
 - 서버 구동 테스트
 ```bash
+# python manage.py runserver 8080
+# python manage.py runserver 0.0.0.0:8080
 python manage.py runserver
 ```
 - 프로젝트 앱 생성
 ```bash
 python manage.py startapp api
+```
+
+- 슈퍼 유저 생성
+```bash
+python manage.py createsuperuser
 ```
