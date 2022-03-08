@@ -28,10 +28,14 @@ def orm_cook_book(request):
     question_queryset = Question.objects.all()
     query = str(question_queryset.query)
 
+    # return HttpResponse(queryDataAll)
+
     # SELECT "pybo_question"."id", "pybo_question"."subject", "pybo_question"
     # ."content", "pybo_question"."create_date" FROM "pybo_question" WHERE "pybo_question"."id" = 5
     question_queryset = Question.objects.filter(id=5)
     query = str(question_queryset.query)
+
+    # return HttpResponse(queryDataAll)
 
     # 2. OR 연산으로 일부 조건을 하나라도 만족하는 항목을 구하기
     # SELECT "pybo_question"."id", "pybo_question"."subject", "pybo_question"."content",
@@ -40,9 +44,19 @@ def orm_cook_book(request):
     query = str(question_queryset)
     queryDataAll = [i for i in question_queryset]
 
+    # return HttpResponse(queryDataAll)
+
     question_queryset = Question.objects.filter(Q(subject__startswith='q') | Q(subject__startswith='w'))
     query = str(question_queryset)
     queryDataAll = [i for i in question_queryset]
 
+    # 3. AND 연산으로 여러 조건을 모두 만족하는 항목을 구g하기
+    # SELECT username, first_name, last_name, email FROM auth_user WHERE first_name LIKE 'R%' AND last_name LIKE 'D%';
+    question_queryset = Question.objects.filter(subject__startswith='q') & Question.objects.filter(subject__startswith='w')
+    # question_queryset = Question.objects.filter(subject__startswith='q', subject__startswith='w') # Keyword argument repeated
+    question_queryset = Question.objects.filter(subject__startswith='q', create_date__startswith='w')
+    question_queryset = Question.objects.filter(Q(subject__startswith='q') & Q(subject__startswith='w'))
+
+    # queryDataAll = [i for i in question_queryset]
 
     return HttpResponse(queryDataAll)
