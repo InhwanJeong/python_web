@@ -18,5 +18,5 @@ pip install fastapi uvicorn[standard]
 uvicorn main:app --reload
 ```
 
-### swagger 연동
+### swagger 확인
 - localhost:8000/docs
