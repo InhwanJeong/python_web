@@ -14,14 +14,25 @@ query = str(question_queryset.query)
 
 ### 2. ORM OR 연산으로 일부 조건을 하나라도 만족하는 항목을 구하기
 ```python
-    # 2. OR 연산으로 일부 조건을 하나라도 만족하는 항목을 구하기
-    # SELECT "pybo_question"."id", "pybo_question"."subject", "pybo_question"."content",
-    # "pybo_question"."create_date" FROM "pybo_question" WHERE ("pybo_question"."subject" LIKE q% ESCAPE '\' OR "pybo_question"."subject" LIKE w% ESCAPE '\')
-    question_queryset = Question.objects.filter(subject__startswith='q') | Question.objects.filter(subject__startswith='w')
-    query = str(question_queryset)
-    queryDataAll = [i for i in question_queryset]
+# 2. OR 연산으로 일부 조건을 하나라도 만족하는 항목을 구하기
+# SELECT "pybo_question"."id", "pybo_question"."subject", "pybo_question"."content",
+# "pybo_question"."create_date" FROM "pybo_question" WHERE ("pybo_question"."subject" LIKE q% ESCAPE '\' OR "pybo_question"."subject" LIKE w% ESCAPE '\')
+question_queryset = Question.objects.filter(subject__startswith='q') | Question.objects.filter(subject__startswith='w')
+query = str(question_queryset)
+queryDataAll = [i for i in question_queryset]
 
-    question_queryset = Question.objects.filter(Q(subject__startswith='q') | Q(subject__startswith='w'))
-    query = str(question_queryset)
-    queryDataAll = [i for i in question_queryset]
+question_queryset = Question.objects.filter(Q(subject__startswith='q') | Q(subject__startswith='w'))
+query = str(question_queryset)
+queryDataAll = [i for i in question_queryset]
+```
+
+### 3. AND 연산으로 여러 조건을 모두 만족하는 항목을 구하기
+```python
+# SELECT username, first_name, last_name, email FROM auth_user WHERE first_name LIKE 'R%' AND last_name LIKE 'D%';
+question_queryset = Question.objects.filter(subject__startswith='q') & Question.objects.filter(subject__startswith='w')
+# question_queryset = Question.objects.filter(subject__startswith='q', subject__startswith='w') # Keyword argument repeated
+question_queryset = Question.objects.filter(subject__startswith='q', create_date__startswith='w')
+question_queryset = Question.objects.filter(Q(subject__startswith='q') & Q(subject__startswith='w'))
+
+# queryDataAll = [i for i in question_queryset]
 ```
