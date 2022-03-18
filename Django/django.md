@@ -20,3 +20,9 @@ python manage.py startapp api
 ```bash
 python manage.py createsuperuser
 ```
+
+- 모델 생성
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
