@@ -26,3 +26,8 @@ python manage.py createsuperuser
 python manage.py makemigrations
 python manage.py migrate
 ```
+
+- 마이그레이션 상태 확인
+```bash
+python manage.py showmigrations
+```

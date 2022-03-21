@@ -5,8 +5,9 @@
   - view 
   - controller
 
-### [django 더 자세히 알아보기](./django.md)
-- 프로젝트 생성
+### [django 더 자세히 알아보기](django_command.md)
+
+##### 프로젝트
   - 프로젝트 생성(startproject)
     - manage.py 
     - setting.py
@@ -18,14 +19,15 @@
     - admin.py
     - view.py
     - test.py
-- 프로젝트 설정(setting.py)
-  - DEBUG : 디버그 모드 설정
+  - 프로젝트 설정(setting.py)
+    - DEBUG : 디버그 모드 설정
+    - INSTALLED_APPS : startApp 또는 여러 모듈 설치시 여기에 명시해주어야 함.
+  - manage.py
+    - startapp - 앱 생성
+    - runserver - 서버 실행 
+    - createsuperuser - 관리자 생성
+    - makemigrations app - app 모델 변경사항 체크
+    - migrate - 변경사항을 DB에 저장
+    - shell - 쉘을 통해 데이터 확인 
+    - collectstatic - 정적파일을 한곳에 모음
   
-- manage.py
-  - startapp - 앱 생성
-  - runserver - 서버 실행 
-  - createsuperuser - 관리자 생성
-  - makemigrations app - app 모델 변경사항 체크
-  - migrate - 변경사항을 DB에 저장
-  - shell - 쉘을 통해 데이터 확인 
-  - collectstatic - 정적파일을 한곳에 모음
