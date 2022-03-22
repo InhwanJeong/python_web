@@ -5,6 +5,10 @@
   - view 
   - controller
 
+### keyword
+- CORS
+- JWT
+
 ### [django 더 자세히 알아보기](django_command.md)
 
 ##### 프로젝트
