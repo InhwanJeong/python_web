@@ -58,3 +58,57 @@ urlpatterns = [
     ...
 ]
 ```
+
+### 토큰 만료 시간 설정
+- setting.py
+```python
+from datetime import timedelta
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=2),
+}
+```
+
+### API 접근 권한 설정
+
+- setting.py
+```python
+REST_FRAMEWORK = { # 권한 설정
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+    ]
+}
+```
+
+### 토큰 커스텀
+```python
+# JWT custom class
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Add custom claims
+        token['index'] = user.index
+        token['id'] = user.username
+
+        return token
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+```
+
+
+### 토큰 사용
+
+```python
+from rest_framework.views import APIView
+class Login(APIView):
+    permission_classes = [AllowAny]
+    def post(self, request, id):
+        tokenString = str(request.META['HTTP_AUTHORIZATION']).split(' ')[-1]
+        accessTokenObject = AccessToken(tokenString)
+        accessTokenObject["index"]
+```
